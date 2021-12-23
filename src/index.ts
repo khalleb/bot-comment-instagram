@@ -36,12 +36,13 @@ async function commentPost(page: puppeteer.Page, i: number): Promise<void> {
   const comment = randomComments();
   console.log("comment --> " + comment );
   await delay(randomTime())
-
+  
   await page.waitForSelector('textarea');
   await page.type('textarea', comment);
   await page.click('button[type="submit"]');
+  await page.focus('textarea');
 
-  console.log("Comment ::", i);
+  console.log(`${new Date().toLocaleString()}  Comment ::`, i);
 
   return commentPost(page, i + 1)
 }
